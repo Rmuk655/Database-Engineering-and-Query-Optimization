@@ -1,68 +1,40 @@
-# DBMS — Chinook Database Analysis
+# Database Engineering and Query Optimization
 
-SQL queries for business analytics on the Chinook music store 
-database using PostgreSQL.
+PostgreSQL coursework and practical exercises covering relational queries, business analytics and query-performance analysis.
 
----
+## Chinook database analysis
 
-## Database Used
+The root-level SQL exercise uses the Chinook music-store database to answer business questions with joins, subqueries, grouping and aggregation.
 
-- **Database**: Chinook
-- **DBMS**: PostgreSQL
+The ten questions cover:
+- Employee reporting relationships
+- Customer purchasing activity
+- Average invoice totals by country
+- Revenue and track counts by genre
+- Playlist usage and purchase frequency
+- Customer coverage across genres
 
----
+### Run the SQL exercise
 
-## Exercises
-
-Write SQL queries for the following using the Chinook database:
-
-1. Find the manager(s) to whom the **maximum number of employees** report.  
-   Print manager **ID, name, and total number of employees** reporting.
-
-2. Find the customer(s) who have purchased the **maximum number of tracks**.  
-   Print customer **ID, name, and total number of tracks purchased**.
-
-3. Find the **country/countries** with the **highest average invoice total**.  
-   Print **country name and average invoice total**.
-
-4. Find the **total sales per genre**.  
-   Print **genre and total sales**, sorted in **descending order of revenue**.
-
-5. Find the **genre with the maximum number of tracks**.  
-   Print **genre name and track count**.
-
-6. Find the **top 3 genres** purchased most by customers from **USA**.  
-   Print **genre name and count of tracks purchased**.
-
-7. Find the **count of customers who never bought tracks** from the **most popular genre**.
-
-8. Find the **count of tracks** that appear in **more than 5 playlists**.
-
-9. Find the **number of tracks** that:
-   - Appear in **at least one playlist**, and
-   - Were purchased **fewer than 5 times** in total.
-
-10. Find the **count of customers who bought every genre at least once**.
-
----
-
-## Run
-
-Requires PostgreSQL (`sudo apt install postgresql` on Debian / Ubuntu).
+Requires PostgreSQL and the Chinook database dump.
 
 ```bash
-# load the database (the script creates and connects to a database named chinook)
+# Load the Chinook database (adjust the path and role for your setup).
 psql -U postgres -f chinook/Chinook_PostgreSql.sql
-# run the ten queries
+
+# Execute the query set.
 psql -U postgres -d chinook -f Group01_query.sql
 ```
 
-`Group01_output.txt` holds a reference run.
+- [SQL queries](Group01_query.sql)
+- [Original query version](Group01_query_original.sql)
+- [Reference output](Group01_output.txt)
+- [Assignment report](Group01_report.pdf)
 
----
+## Query optimization and performance analysis
 
-## Notes
+The [Query-Optimization-and-Performance-Analysis](Query-Optimization-and-Performance-Analysis/) directory contains the separate query-optimization work. Consult its own README and experiment files for workload setup, measurements and conclusions.
 
-- Uses appropriate **joins, subqueries, grouping, and aggregation**.
+## Scope
 
----
+This repository contains coursework and experimental analysis. Benchmark results should be interpreted in the context of the database, data scale, indexes, PostgreSQL configuration and hardware used.
