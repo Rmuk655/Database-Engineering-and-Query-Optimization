@@ -1,5 +1,6 @@
 import os
 import psycopg2
+from psycopg2 import sql
 import sys
 # csv imported for creating a file output.csv which task2B.py uses to access the selectivity values.
 import csv
@@ -63,7 +64,8 @@ def get_quantity_for_selectivity(cursor, selectivity):
     """
     # We find the min and max values in the table under the given column and approximate the X value based on that.
     global no_of_queries
-    cursor.execute(f"SELECT MIN({l_quantity}), MAX({l_quantity}) FROM lineitem")
+    col = sql.Identifier(l_quantity)
+    cursor.execute(sql.SQL("SELECT MIN({c}), MAX({c}) FROM lineitem").format(c=col))
     no_of_queries += 1
     min, max = cursor.fetchone()
     min = float(min)
@@ -123,7 +125,7 @@ def verify_selectivity(cursor, quantity_threshold, total_rows):
     # We call the COUNT(*) query and increment the no of queries by 1.
     global no_of_queries
     no_of_queries += 1
-    cursor.execute(f"SELECT COUNT(*) FROM lineitem WHERE {l_quantity} <= {quantity_threshold}")
+    cursor.execute(sql.SQL("SELECT COUNT(*) FROM lineitem WHERE {c} <= %s").format(c=sql.Identifier(l_quantity)), (quantity_threshold,))
     # We return the value of selectivity corresponding to the given value of X as COUNT(*)/total_rows.
     return cursor.fetchone()[0]/total_rows
 
