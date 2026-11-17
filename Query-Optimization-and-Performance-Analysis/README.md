@@ -50,6 +50,15 @@ python setup_tpch.py --scale 0.1       # creates and loads the tpch_db database 
 
 `setup_tpch.py` generates TPC-H data with DuckDB's built-in generator, so no separate `dbgen` is needed. The assignments themselves used scale factor 10 (`Assignment1/task1/query.sql` loads `lineitem_sf10.csv`); use `--scale 10` to match, which needs several GB of disk. Connection settings come from `PGHOST`, `PGPORT`, `PGUSER` and `PGPASSWORD` (defaults: `localhost`, `5432`, `postgres`).
 
+`bash setup.sh` does all of the above on Ubuntu/WSL in one go: PostgreSQL 17 from the official PGDG apt repository, the vendored `pg_hint_plan` build, a Python venv with both requirements files, and the TPC-H load. It needs a password for the local `postgres` user and takes an optional scale factor:
+
+```bash
+PGPASSWORD=<choose a password> bash setup.sh          # scale 0.1
+PGPASSWORD=<choose a password> bash setup.sh 10       # scale 10 as in the assignments (several GB)
+```
+
+The TPC-H data is generated locally by DuckDB (needs internet access for pip and DuckDB's `tpch` extension); nothing is downloaded from elsewhere.
+
 ### What runs where
 
 Verified against a scale-0.1 database:

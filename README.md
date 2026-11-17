@@ -2,6 +2,17 @@
 
 PostgreSQL coursework and practical exercises covering relational queries, business analytics and query-performance analysis.
 
+## Setup
+
+Ubuntu or WSL with `sudo`. `bash setup.sh` installs PostgreSQL (`postgresql`, `postgresql-client`), starts the server, loads Chinook from `chinook/Chinook_PostgreSql.sql` (the script drops and recreates a database named `chinook`, so it overwrites an existing one with that name) and runs `Group01_query.sql`.
+
+```bash
+bash setup.sh
+sudo -u postgres psql -d chinook -f Group01_query.sql    # re-run the queries later
+```
+
+The data is the bundled Chinook PostgreSQL script (no download). Tested against PostgreSQL 16 (the Ubuntu 24.04 version).
+
 ## Chinook database analysis
 
 The root-level SQL exercise uses the Chinook music-store database to answer business questions with joins, subqueries, grouping and aggregation.
