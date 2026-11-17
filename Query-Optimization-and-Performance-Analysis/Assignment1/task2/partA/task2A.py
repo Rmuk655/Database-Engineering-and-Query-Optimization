@@ -93,7 +93,7 @@ def get_quantity_for_selectivity(cursor, selectivity):
     for _ in range(0, no_of_iterations):
         mid = (low + high)/2.0
         # Now estimate the selectivity using thw count query and increment the no of queries.
-        cursor.execute("SELECT COUNT(*) FROM lineitem WHERE l_quantity <= %s",(mid,))
+        cursor.execute(sql.SQL("SELECT COUNT(*) FROM lineitem WHERE {c} <= %s").format(c=sql.Identifier(l_quantity)), (mid,))
         no_of_queries += 1
         actual_sel = float(cursor.fetchone()[0])/total_rows
         # Recalculate error.
